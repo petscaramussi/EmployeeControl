@@ -44,6 +44,19 @@ The code samples in the book use Apache Maven as the build tool. If you prefer G
 | `./mvnw spring-boot:run`         | `./gradlew bootRun`        |
 | `./mvnw spring-boot:build-image` | `./gradlew bootBuildImage` |
 
+### MySql
+
+1. You must have MySql installed on your machine and the server running.
+
+2. create database:
+```sql
+    create database employee_management_system;
+```
+
+3. configure your MySql port on Spring: springboot-backend/src/main/resources/application.properties set
+```
+spring.datasource.url=jdbc:mysql://localhost:{{ your port here }}/employee_management_system?useSSL=false
+```
  
  ## Explanations
  
