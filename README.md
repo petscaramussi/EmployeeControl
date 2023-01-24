@@ -100,6 +100,136 @@ Component TS:
 
 ### Read
 
+On Spring:
+
+```java
+    // create employee rest api
+    
+    @GetMapping("/employees/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id){
+        Employee employee =  employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));
+        return ResponseEntity.ok(employee);
+    }
+    
+```
+On Angular:
+
+Service:
+```javascript
+    getEmployeeById(id: Number): Observable<Employee>{
+    return this.httpClient.get<Employee>(`${this.baseURL}/${id}`);
+  }
+  }
+```
+
+Component TS:
+
+```javascript
+    ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
+    this.emplouyeeService.getEmployeeById(this.id).subscribe(data => {
+      this.employee = data;
+    });
+  }
+```
+
+### Update
+
+On Spring:
+
+```java
+    // update employee rest api
+    
+    @PutMapping("/employees/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){
+        Employee employee =  employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));
+
+        employee.setFirstName(employeeDetails.getFirstName());
+        employee.setLastName(employeeDetails.getLastName());
+        employee.setEmailId(employeeDetails.getEmailId());
+
+        Employee updateEmployee = employeeRepository.save(employee);
+
+        return ResponseEntity.ok(updateEmployee);
+    }
+    
+```
+On Angular:
+
+Service:
+```javascript
+    updateEmployee(id: number, employee: Employee): Observable<Object>{
+    return this.httpClient.put(`${this.baseURL}/${id}`, employee);
+  }
+```
+
+Component TS:
+
+```javascript
+    onSubmit(){
+    this.employeeService.updateEmployee(this.id, this.employee).subscribe(data => {
+      this.goToEmployeeList();
+    }, error => console.log(error));
+  }
+```
+
+### Delete
+
+On Spring:
+
+```java
+    //delete employee rest api
+    
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id){
+        Employee employee =  employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));
+
+        employeeRepository.delete(employee);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return  ResponseEntity.ok(response);
+    }
+    
+```
+On Angular:
+
+Service:
+```javascript
+   deleteEmployee(id: number): Observable<Object>{
+     return this.httpClient.delete(`${this.baseURL}/${id}`);
+  }
+```
+
+Component TS:
+
+```javascript
+    deleteEmployee(id: number){
+     this.employeeService.deleteEmployee(id).subscribe(data => {
+       console.log(data);
+       this.getEmployees();
+    });
+  }
+```
+
+
+## Coding guides
+
+- [Angular](docs/coding-guides/angular.md)
+- [TypeScript](docs/coding-guides/typescript.md)
+- [Bootstrap](docs/https://getbootstrap.com)
+- [Java](https://dev.java/learn/getting-started-with-java/)
+- [Spring](https://spring.io/guides/gs/spring-boot/)
+
+
+
+
+
+
+
+
+
+
+
 
  
  
