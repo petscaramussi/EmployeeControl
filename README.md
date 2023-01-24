@@ -214,9 +214,9 @@ Component TS:
 
 ## Coding guides
 
-- [Angular](docs/coding-guides/angular.md)
-- [TypeScript](docs/coding-guides/typescript.md)
-- [Bootstrap](docs/https://getbootstrap.com)
+- [Angular]([docs/coding-guides/angular.md](https://angular.io/))
+- [TypeScript]([docs/coding-guides/typescript.md](https://www.typescriptlang.org/))
+- [Bootstrap](https://getbootstrap.com)
 - [Java](https://dev.java/learn/getting-started-with-java/)
 - [Spring](https://spring.io/guides/gs/spring-boot/)
 
